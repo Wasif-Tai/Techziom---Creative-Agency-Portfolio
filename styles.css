@@ -1362,67 +1362,6 @@ header {
   scroll-behavior: smooth;
   padding: 0 80px 40px 80px; /* Added horizontal padding */
 }
-
-/* Slider Controls */
-.slider-controls {
-  display: flex;
-  gap: 12px;
-  align-self: flex-end;
-  margin-bottom: 10px;
-}
-
-.slider-btn {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-.slider-btn::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    -200deg,
-    rgba(190, 255, 80, 0.32) 0%,
-    rgba(255, 255, 255, 0.05) 55%
-  );
-  border-radius: inherit;
-  padding: 1px;
-  mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-}
-
-.slider-btn:hover {
-  background: #beff50;
-  border-color: #beff50;
-}
-
-.slider-btn:hover img {
-  filter: invert(1);
-}
-
-.slider-btn img {
-  width: 18px;
-  height: 18px;
-  transition: filter 0.3s ease;
-}
-
-.prev-btn img {
-  transform: rotate(180deg);
 }
 
 .project-1, .project-2, .project-3, .project-4 {
