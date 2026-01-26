@@ -1362,7 +1362,7 @@ header {
   scroll-behavior: smooth;
   padding: 0 80px 40px 80px; /* Added horizontal padding */
 }
-}
+
 
 .project-1, .project-2, .project-3, .project-4 {
   display: flex;
