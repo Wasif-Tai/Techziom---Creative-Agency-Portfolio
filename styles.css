@@ -1288,6 +1288,20 @@ header {
   letter-spacing: -2%;
   background-color: #0c0c0c;
 }
+.glow-circle-3 {
+  position: absolute;
+  top: 3800px;
+  left: -40%;
+  z-index: -10;
+  width: 80%;
+  height: 100%;
+  overflow: visible;
+  opacity: 0.9;
+}
+.glow-circle-3 img {
+  width: 100%;
+  height: auto;
+}
 /* Portfolio Section Starts Here */
 .our-portfolio-heading {
   display: flex;
@@ -1415,4 +1429,53 @@ header {
 
 .projects-top::-webkit-scrollbar-thumb:hover {
   background: #aaff20;
+}
+.projects-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Changed from center to allow bi-directional scrolling */
+  gap: 28px;
+  margin-bottom: 34px;
+  width: 100%;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  padding: 0 80px 40px 80px; /* Synchronized padding with .projects-top */
+}
+
+/* Custom Scrollbar Styles for Bottom Slider */
+.projects-bottom::-webkit-scrollbar {
+  height: 12px;
+  display: block;
+}
+
+.projects-bottom::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 100px;
+  margin-inline: 80px;
+}
+
+.projects-bottom::-webkit-scrollbar-thumb {
+  background-color: #beff50;
+  border-radius: 100px;
+  border: 1px solid transparent;
+  background-clip: content-box;
+  cursor: pointer;
+}
+
+.projects-bottom::-webkit-scrollbar-thumb:hover {
+  background: #aaff20;
+}
+.glow-circle-4 {
+  position: absolute;
+  top: 4700px;
+  left: -40%;
+  z-index: -10;
+  width: 80%;
+  height: 100%;
+  overflow: visible;
+  opacity: 0.9;
+}
+.glow-circle-4 img {
+  width: 100%;
+  height: auto;
 }

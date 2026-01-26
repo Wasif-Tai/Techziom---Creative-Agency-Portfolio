@@ -1,9 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const projectsContainer = document.querySelector('.projects-top');
-    if (projectsContainer) {
-        // Calculate the center position
-        const scrollCenter = (projectsContainer.scrollWidth - projectsContainer.clientWidth) / 2;
-        // Scroll to the center
-        projectsContainer.scrollLeft = scrollCenter;
-    }
+    const sliders = ['.projects-top', '.projects-bottom'];
+    
+    sliders.forEach(selector => {
+        const container = document.querySelector(selector);
+        if (container) {
+            // Calculate the center position
+            const scrollCenter = (container.scrollWidth - container.clientWidth) / 2;
+            // Scroll to the center
+            container.scrollLeft = scrollCenter;
+        }
+    });
 });
