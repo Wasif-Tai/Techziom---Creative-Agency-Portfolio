@@ -180,46 +180,69 @@ header {
 }
 
 /* Burger Menu Global */
+/* Hamburger Icon */
 .burger {
-  display: none;
-  flex-direction: column;
+  position: relative;
+  width: 26px;
+  height: 22px;
+  background: transparent;
   cursor: pointer;
-  width: 40px;
-  height: 30px;
-  background-color: #ffffff;
-  border: none;
-  z-index: 1001;
-  justify-content: space-between;
-  padding: 5px;
-  border-radius: 4px;
+  /* display none for now will open it in tablet and mobile */
+  display: none;
+  scale: calc(0.8);
 }
 
-/* .burger input {
-  display: ;
-} */
+.burger input {
+  display: none;
+}
 
 .burger span {
   display: block;
+  position: absolute;
+  height: 4px;
   width: 100%;
-  height: 3px;
-  background-color: #ffffff;
-  border-radius: 99px;
-  transition: all 0.3s ease-in-out;
+  background: #ffffff;
+  border-radius: 9px;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0deg);
+  transition: .25s ease-in-out;
 }
 
-/* Burger Animation */
-.burger.active span:nth-child(2) {
-  
-  transform: rotate(45deg) translate(5px, 5px);
+.burger span:nth-of-type(1) {
+  top: 0px;
+  transform-origin: left center;
+  width: 100%;
 }
 
-.burger.active span:nth-child(3) {
-  opacity: 100%;
+.burger span:nth-of-type(2) {
+  top: 50%;
+  transform: translateY(-50%);
+  transform-origin: left center;
 }
 
-.burger.active span:nth-child(4) {
-  transform: rotate(-45deg) translate(5px, -5px) ;;
-  
+.burger span:nth-of-type(3) {
+  top: 100%;
+  transform-origin: left center;
+  transform: translateY(-100%);
+  width: 100%;
+}
+
+.burger input:checked~span:nth-of-type(1) {
+  transform: rotate(45deg);
+  top: 0px;
+  left: 5px;
+}
+
+.burger input:checked~span:nth-of-type(2) {
+  width: 0%;
+  opacity: 0;
+}
+
+.burger input:checked~span:nth-of-type(3) {
+  transform: rotate(-45deg);
+  top: 28px;
+  left: 5px;
 }
 
 /* Hero Section */
@@ -12466,7 +12489,8 @@ header {
   body {
     background-color: #0c0c0c;
     font-family: "Satoshi", sans-serif;
-    max-width: 425px;
+    width: 100%;
+    max-width: 100%;
     justify-content: center;
     margin: 0 auto;
     overflow-x: hidden;
@@ -12488,60 +12512,88 @@ header {
     transform: none;
   }
 
+  /* Hamburger Icon Enabled */
   .burger {
-    display: flex !important;
-    flex-direction: column;
-    background-color: #ffffff;
+    position: relative;
     width: 40px;
     height: 30px;
-    background: #ffffff;
-    border: none;
-    z-index: 1001;
-    justify-content: space-between;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    /* Show only on mobile screen */
+    z-index: 1100;
   }
+
+
+
 
   .nav-links {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 425px;
     height: 100vh;
-    background: #0c0c0c;
+    background: rgba(12, 12, 12, 0.98);
+    backdrop-filter: blur(10px);
+    display: none;
+    /* Hidden by default */
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 40px;
-    z-index: 999;
-    transition: transform 0.3s ease-in-out;
-    transform: translateX(100%);
+    gap: 32px;
+    z-index: 1050;
     margin: 0;
     padding: 0;
     border-radius: 0;
-    box-shadow: none;
-    display: flex;
   }
 
   .nav-links.active {
-    transform: translateX(0);
+    display: flex;
+    /* Show when active */
   }
 
   .nav-links a {
-    font-size: 24px;
-    color: #fff;
+    font-size: 28px;
+    font-weight: 500;
+    color: #ffffff;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+  }
+
+  .nav-links.active a {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.2s;
+
+  }
+
+  .nav-links a:nth-child(2) {
+    transition-delay: 0.3s;
+  }
+
+  .nav-links a:nth-child(3) {
+    transition-delay: 0.4s;
+  }
+
+  .nav-links a:nth-child(4) {
+    transition-delay: 0.5s;
   }
 
   .nav-links a:first-child {
     background: transparent;
-    color: #fff;
+    color: #BEFF50;
     padding: 0;
+    height: fit-content;
   }
 
   .nav-links a:first-child::before {
     display: none;
   }
 
-  .Primary-btn {
-    display: none;
+  header .Primary-btn {
+    display: none !important;
+    /* Hide header button on mobile */
   }
 
 
@@ -12555,7 +12607,7 @@ header {
   /* Hero Section */
   .Hero-Section {
     width: 100%;
-    height: 400px;
+    height: 300px;
     background-image: url(/assets/Hero-Bg.png);
     background-size: cover;
     background-repeat: repeat;
@@ -12572,6 +12624,7 @@ header {
     flex-direction: column;
     align-items: center;
     gap: 30px;
+    margin-top: -20px;
   }
 
   .expertise {
@@ -12580,13 +12633,15 @@ header {
     align-items: center;
     gap: 16px;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 13px;
     letter-spacing: -2%;
     padding: 8px 8px;
+    margin: 0px 8px;
     border-radius: 100px;
     background: rgba(255, 255, 255, 0.06);
     box-shadow: inset 0px 4px 4px rgba(255, 255, 255, 0.04);
     color: #ffffff;
+    scale: calc(0.9);
   }
 
   .expertise::before {
@@ -12611,7 +12666,7 @@ header {
   .our-expertise {
     color: #0c0c0c;
     background-color: #beff50;
-    padding: 2.5px 12px 5px 12px;
+    padding: 6px 12px 5px 12px;
     border-radius: 100px;
     height: 28px;
     align-items: center;
@@ -12629,13 +12684,15 @@ header {
   }
 
   .head-para h1 {
-    font-size: 62px;
+    font-size: 54px;
     font-weight: 500;
     text-align: center;
     line-height: 110%;
     letter-spacing: -4%;
-    width: 100%;
+    width: 365px;
     max-width: 600px;
+    margin: 0px auto;
+    margin-top: -10px;
   }
 
   .hero-highlight-txt {
@@ -12648,16 +12705,19 @@ header {
     position: relative;
     bottom: -8px;
     margin: 0px 10px;
+    width: 48px;
+    height: auto;
   }
 
   .head-para p {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 400;
     letter-spacing: -2%;
     line-height: 160%;
     color: rgba(255, 255, 255, 0.5);
     width: 560px;
     text-align: center;
+    width: 400px;
   }
 
   .Secondry-btn {
@@ -12705,15 +12765,21 @@ header {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-top: 14px;
+    margin-top: 20px;
   }
 
   /* Images Developer and Designer */
   .developer {
     position: absolute;
     top: 120px;
-    left: 80px;
+    left: 40px;
+    width: 40px;
+    height: auto;
+  }
+
+  .developer img {
     width: 80px;
+    height: auto;
   }
 
   .designer {
@@ -12722,14 +12788,19 @@ header {
     right: 80px;
   }
 
+  .designer img {
+    width: 80px;
+    height: auto;
+  }
+
   /* Rotated Cards */
   .rotated-card-left {
     transform: rotate(0deg);
     position: absolute;
     top: 660px;
-    left: 60px;
+    left: 20px;
     padding: 28px 24px;
-    width: 315px;
+    width: 385px;
     color: #ffffff;
     background-color: rgba(255, 255, 255, 0.04);
     /* border: ; Graident will be applied at border */
@@ -12787,11 +12858,11 @@ header {
 
   .rotated-card-right {
     position: absolute;
-    top: 660px;
-    right: 60px;
+    top: 868px;
+    right: 20px;
     padding: 28px 24px;
     transform: rotate(0deg);
-    width: 315px;
+    width: 385px;
     color: #ffffff;
     background-color: rgba(255, 255, 255, 0.04);
     /* border: ; Graident will be applied at border */
@@ -12860,15 +12931,15 @@ header {
     align-items: center;
     justify-content: center;
     background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 36px;
+    border-radius: 24px;
     margin-bottom: 160px;
-    margin: 380px 56px;
+    margin: 540px 20px;
   }
 
   .video-area video {
     width: 100%;
     height: 100%;
-    border-radius: 30px;
+    border-radius: 20px;
     object-fit: cover;
   }
 
@@ -12910,7 +12981,7 @@ header {
   .projects-preview {
     position: relative;
     width: 100%;
-    margin-top: 1100px;
+    margin-top: 1200px;
   }
 
   .project-preview {
@@ -12928,6 +12999,8 @@ header {
     display: flex;
     flex-direction: column;
     gap: 40px;
+    scale: calc(0.7);
+    margin-bottom: -20px;
   }
 
   .logo-top,
@@ -12942,16 +13015,16 @@ header {
   .testimonials {
     width: 100%;
     height: auto;
-    margin-top: 140px;
+    margin-top: 100px;
     margin-bottom: 140px;
-    padding: 0px 40px;
+    padding: 0px 20px;
   }
 
   .content-top {
     display: flex;
-    align-items: end;
+    flex-direction: column;
     justify-content: space-between;
-    width: 100%;
+    width: 425px;
     margin-bottom: 60px;
   }
 
@@ -12959,8 +13032,10 @@ header {
     display: flex;
     flex-direction: column;
     gap: 14px;
+    align-items: start;
     color: #ffffff;
-    width: 410px;
+    width: 425px;
+    margin-bottom: 20px;
   }
 
   .testimonials-div {
@@ -12997,10 +13072,10 @@ header {
   }
 
   .right-top-testimonials h2 {
-    font-size: 52px;
+    font-size: 48px;
     font-weight: 500;
     letter-spacing: -4%;
-    width: 450px;
+    width: 380px;
   }
 
   .highlighted-yellow {
@@ -13008,12 +13083,13 @@ header {
   }
 
   .content-top p {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.5);
-    width: 514px;
+    width: 380px;
     letter-spacing: -2%;
     line-height: 160%;
+    margin-right: 40px;
   }
 
   .bottom-testimonials {
@@ -13025,7 +13101,7 @@ header {
   }
 
   .bottom-testimonials img {
-    width: 688px;
+    width: 380px;
   }
 
   .testimonials-reviews {
@@ -13177,10 +13253,10 @@ header {
   }
 
   .our-capabilities-heading h2 {
-    font-size: 52px;
+    font-size: 48px;
     font-weight: 500;
     letter-spacing: -4%;
-    width: 100%;
+    width: 380px;
     text-align: left;
     margin-top: -9px;
   }
@@ -13193,7 +13269,7 @@ header {
   .Capabilities {
     width: 100%;
     height: auto;
-    padding: 0px 0px 0px 40px;
+    padding: 0px 0px 0px 20px;
     display: flex;
     flex-direction: column;
     gap: 80px;
@@ -13204,10 +13280,13 @@ header {
     display: flex;
     align-items: center;
     justify-content: start;
-    gap: 28px;
+    gap: 20px;
     max-height: 460px;
     overflow-x: auto;
     padding-bottom: 40px;
+    margin-left: -20px;
+    scale: 0.9;
+    margin-top: -20px;
     /* Increased space for scrollbar */
   }
 
@@ -13790,7 +13869,7 @@ header {
     align-items: start;
     color: #ffffff;
     gap: 32px;
-    padding: 0px 40px 0px 40px;
+    padding: 0px 20px 0px 20px;
     width: 100%;
     margin-top: 160px;
   }
@@ -13833,10 +13912,10 @@ header {
   }
 
   .our-portfolio-heading h2 {
-    font-size: 52px;
+    font-size: 48px;
     font-weight: 500;
     letter-spacing: -4%;
-    width: 100%;
+    width: 380px;
     text-align: left;
     margin-top: -9px;
   }
@@ -13863,7 +13942,7 @@ header {
     width: 100%;
     overflow-x: scroll;
     scroll-behavior: smooth;
-    padding: 0 80px 40px 80px;
+    padding: 0px 0px 40px 0px;
     /* Added horizontal padding */
   }
 
@@ -13992,7 +14071,7 @@ header {
   .digital-products {
     width: 100%;
     height: auto;
-    padding: 0px 40px;
+    padding: 0px 20px;
     display: flex;
     flex-direction: column;
     gap: 64px;
@@ -14046,11 +14125,11 @@ header {
   }
 
   .header-digital h2 {
-    font-size: 52px;
+    font-size: 48px;
     font-weight: 500;
     letter-spacing: -4%;
     line-height: 120%;
-    width: 604px;
+    width: 400px;
     text-align: center;
     margin-top: -9px;
   }
@@ -14060,11 +14139,11 @@ header {
   }
 
   .header-digital p {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 400;
     letter-spacing: -2%;
     line-height: 160%;
-    width: 462px;
+    width: 380px;
     text-align: center;
     color: rgba(255, 255, 255, 0.5);
     margin-top: -10px;
@@ -14077,7 +14156,14 @@ header {
     align-items: center;
     gap: 40px;
     margin-top: -30px;
-    scale: calc(0.65);
+    scale: calc(0.9);
+    flex-wrap: wrap;
+    width: 380px;
+  }
+
+  .products-logos div img {
+    width: 60px;
+    height: auto;
   }
 
 
@@ -14139,10 +14225,10 @@ header {
   }
 
   .how-we-work-heading h2 {
-    font-size: 52px;
+    font-size: 48px;
     font-weight: 500;
     letter-spacing: -4%;
-    width: 810px;
+    width: 380px;
     text-align: left;
     margin-top: -14px;
   }
@@ -14309,11 +14395,11 @@ header {
   }
 
   .header-founder h2 {
-    font-size: 52px;
+    font-size: 48px;
     font-weight: 500;
     letter-spacing: -4%;
     line-height: 120%;
-    width: 800px;
+    width: 380px;
     text-align: center;
     margin-top: -9px;
   }
@@ -14327,9 +14413,10 @@ header {
     align-items: center;
     justify-content: center;
     width: 100%;
-    scale: calc(0.58);
+    scale: calc(0.67);
     gap: 28px;
-    margin-top: -50px;
+    margin-top: -80px;
+    flex-wrap: wrap;
   }
 
   .Mohsin-Akber {
@@ -14430,9 +14517,9 @@ header {
 
   /* FAQ Section */
   .faq-section {
-    width: 100%;
+    width: 380px;
     height: auto;
-    padding: 0px 40px;
+    margin: 0px 20px;
     display: flex;
     flex-direction: column;
     gap: 64px;
@@ -14443,13 +14530,13 @@ header {
   }
 
   .header-faq h2 {
-    font-size: 52px;
+    font-size: 48px;
     font-weight: 500;
     letter-spacing: -4%;
     line-height: 120%;
-    width: 800px;
+    width: 380px;
     text-align: center;
-    margin-top: -9px;
+    margin-top: -140px;
   }
 
   .highlighted-yellow {
@@ -14458,21 +14545,21 @@ header {
 
   .faq-div {
     display: flex;
-    align-items: start;
-    width: 688px;
-    height: fit-content;
+    flex-direction: column;
+    align-items: center;
     gap: 60px;
-    margin-right: -100px;
     margin-top: -60px;
+    margin-right: 0px;
+    width: 100% !important;
   }
 
   .faq-left {
     display: flex;
     flex-direction: column;
-    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     gap: 20px;
-    margin-right: -100px;
-    width: 688px;
+    width: 380px !important;
   }
 
   .open-faq {
@@ -14482,10 +14569,12 @@ header {
     padding: 24px;
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
     border-radius: 16px;
-    width: 100%;
+    width: 380px !important;
+    max-width: 380px !important;
     gap: 24px;
     position: relative;
     cursor: pointer;
+    box-sizing: border-box;
   }
 
   .open-faq::before,
@@ -14518,7 +14607,10 @@ header {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    width: 592px;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    /* Changed from 592px to fit parent */
   }
 
   .faq-item-inner h5 {
@@ -14549,12 +14641,14 @@ header {
     padding: 24px;
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
     border-radius: 16px;
-    width: 100%;
+    width: 380px !important;
+    max-width: 380px !important;
     gap: 24px;
     height: 60px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     cursor: pointer;
     transition: border-color 0.3s ease;
+    box-sizing: border-box;
   }
 
   .closed-faq .faq-answer {
@@ -14567,7 +14661,7 @@ header {
   }
 
   .closed-faq h5 {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
     letter-spacing: -2%;
     color: #ffffff;
@@ -14575,7 +14669,7 @@ header {
   }
 
   .faq-right {
-    display: none;
+    display: flex;
     flex-direction: column;
     height: 446px;
     border-radius: 14px;
@@ -14583,7 +14677,8 @@ header {
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
     align-items: start;
     justify-content: space-between;
-    width: 0%;
+    width: 380px;
+    margin-right: -100px;
     position: relative;
   }
 
@@ -14593,8 +14688,9 @@ header {
     align-items: center;
     justify-content: center;
     color: #ffffff;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
+
     letter-spacing: -2%;
     padding: 8px 16px 8px 12px;
     background-color: #000000;
@@ -14627,7 +14723,7 @@ header {
   .final-cta {
     width: 100%;
     height: auto;
-    padding: 0px 40px;
+    padding: 0px 20px;
     display: flex;
     flex-direction: column;
     gap: 64px;
@@ -14654,11 +14750,11 @@ header {
   }
 
   .header-cta h2 {
-    font-size: 52px;
+    font-size: 48px;
     font-weight: 500;
     letter-spacing: -4%;
     line-height: 120%;
-    width: 604px;
+    width: 350px;
     text-align: center;
     margin-top: -9px;
   }
@@ -14668,11 +14764,11 @@ header {
   }
 
   .header-cta p {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 400;
     letter-spacing: -2%;
     line-height: 160%;
-    width: 462px;
+    width: 300px;
     text-align: center;
     color: rgba(255, 255, 255, 0.5);
     margin-top: -10px;
@@ -14683,7 +14779,7 @@ header {
   .footer {
     width: 100%;
     height: auto;
-    padding: 0px 80px;
+    padding: 0px 20px;
     display: flex;
     flex-direction: column;
     gap: 44px;
@@ -14735,11 +14831,11 @@ header {
   }
 
   .footer-content h1 {
-    font-size: 52px;
+    font-size: 48px;
     font-weight: 500;
     letter-spacing: -4%;
     line-height: 120%;
-    width: 700px;
+    width: 380px;
     text-align: left;
     margin-top: 48px;
     margin-bottom: 30px;
@@ -14750,7 +14846,7 @@ header {
     font-weight: 400;
     letter-spacing: -2%;
     line-height: 160%;
-    width: 687px;
+    width: 380px;
     text-align: left;
     color: rgba(255, 255, 255, 0.5);
     margin-top: -10px;
@@ -14814,8 +14910,9 @@ header {
 
   .footer-bottom-side {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     gap: 16px;
     width: 100%;
     height: auto;
@@ -14851,6 +14948,11 @@ header {
   .calendar-header span {
     color: #555;
     font-weight: 400;
+  }
+
+  .terms-privacy {
+    display: flex;
+    gap: 16px;
   }
 
   .calendar-grid {
@@ -14963,68 +15065,4 @@ header {
   .time-button:hover {
     border-color: #444;
   }
-}
-
-/* Hamburger Icon */
-.burger {
-  position: relative;
-  width: 40px;
-  height: 30px;
-  background: transparent;
-  cursor: pointer;
-  /* display none for now will open it in tablet and mobile */
-  display: none;
-}
-
-.burger input {
-  display: none;
-}
-
-.burger span {
-  display: block;
-  position: absolute;
-  height: 4px;
-  width: 100%;
-  background: black;
-  border-radius: 9px;
-  opacity: 1;
-  left: 0;
-  transform: rotate(0deg);
-  transition: .25s ease-in-out;
-}
-
-.burger span:nth-of-type(1) {
-  top: 0px;
-  transform-origin: left center;
-  width: 70%
-}
-
-.burger span:nth-of-type(2) {
-  top: 50%;
-  transform: translateY(-50%);
-  transform-origin: left center;
-}
-
-.burger span:nth-of-type(3) {
-  top: 100%;
-  transform-origin: left center;
-  transform: translateY(-100%);
-  width: 50%
-}
-
-.burger input:checked~span:nth-of-type(1) {
-  transform: rotate(45deg);
-  top: 0px;
-  left: 5px;
-}
-
-.burger input:checked~span:nth-of-type(2) {
-  width: 0%;
-  opacity: 0;
-}
-
-.burger input:checked~span:nth-of-type(3) {
-  transform: rotate(-45deg);
-  top: 28px;
-  left: 5px;
 }

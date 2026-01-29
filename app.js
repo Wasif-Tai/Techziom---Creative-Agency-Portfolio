@@ -32,23 +32,45 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Mobile Menu Toggle
-    const mobileMenuBtn = document.querySelector('.burger');
+    // Mobile Menu Toggle with Screen Size Check
+    const burgerInput = document.getElementById('burger');
     const navLinks = document.querySelector('.nav-links');
+    // Specifically target the primary button inside the header
+    const headerBtn = document.querySelector('header .Primary-btn');
 
-    if (mobileMenuBtn && navLinks) {
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenuBtn.classList.toggle('active');
-            navLinks.classList.toggle('active');
-        });
+    if (burgerInput) {
+        const toggleMenu = () => {
+            // Only hide the button if screen width is 425px or less
+            const isMobile = window.innerWidth <= 425;
+            
+            if (burgerInput.checked) {
+                if (navLinks) navLinks.classList.add('active');
+                // Only hide header button on mobile screens
+                if (headerBtn && isMobile) {
+                    headerBtn.style.setProperty('display', 'none', 'important');
+                }
+                document.body.style.overflow = 'hidden';
+            } else {
+                if (navLinks) navLinks.classList.remove('active');
+                // Restore header button visibility on mobile screens
+                if (headerBtn && isMobile) {
+                    headerBtn.style.setProperty('display', 'flex', 'important');
+                }
+                document.body.style.overflow = '';
+            }
+        };
+
+        burgerInput.addEventListener('change', toggleMenu);
 
         // Close menu when clicking a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenuBtn.classList.remove('active');
-                navLinks.classList.remove('active');
+        if (navLinks) {
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    burgerInput.checked = false;
+                    toggleMenu();
+                });
             });
-        });
+        }
     }
 });
 
